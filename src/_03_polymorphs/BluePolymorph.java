@@ -51,16 +51,41 @@ class MovingMorph extends Polymorph{
 }
 
 class theCirc extends Polymorph{
+	
+	int f = 1;
+	int radius = 100;
 
 	theCirc(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
-	}}
+		g.setColor(Color.orange);
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
+	}
+	
+	public void update() {
+			setX((int)(Math.cos(f)*radius) +100);
+			setY((int)(Math.sin(f)*radius) +100);
+			f++;
+	}
+}
 
+class myMouse extends Polymorph{
+
+	myMouse(int x, int y, int width, int height) {
+		super(x, y, width, height);
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(Color.white);
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
+	}
+	
+	public void update() {
+
+	}
+}
 
