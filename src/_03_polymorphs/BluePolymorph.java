@@ -2,6 +2,9 @@ package _03_polymorphs;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class BluePolymorph extends Polymorph{
 
@@ -85,7 +88,43 @@ class myMouse extends Polymorph{
 	}
 	
 	public void update() {
+		setX(MouseInfo.getPointerInfo().getLocation().x);
+		setY(MouseInfo.getPointerInfo().getLocation().y);
+	}
+
+
+}
+
+class iMaGe extends Polymorph{
+
+	iMaGe(int x, int y, int width, int height) {
+		super(x, y, width, height);
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(null);
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
+	}
+	
+	public void update() {
 
 	}
 }
 
+class talkToMe extends Polymorph{
+
+	talkToMe(int x, int y, int width, int height) {
+		super(x, y, width, height);
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(Color.white);
+		g.fillRect(getX(), getY(), getWidth(), getHeight());
+	}
+	
+	public void update() {
+
+	}
+}
