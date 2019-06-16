@@ -3,20 +3,26 @@ package _03_polymorphs;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class PolymorphWindow extends JPanel implements ActionListener {
+public class PolymorphWindow extends JPanel implements ActionListener, MouseListener{
 	public static final int WIDTH = 900;
 	public static final int HEIGHT = 600;
 
 	private JFrame window;
 	private Timer timer;
+	
+	int mouseX;
+	int mouseY;
 
 	ArrayList<Polymorph> demPolymorphs = new ArrayList<Polymorph>();
 
@@ -32,6 +38,8 @@ public class PolymorphWindow extends JPanel implements ActionListener {
 		window.pack();
 		window.setVisible(true);
 
+		this.addMouseListener(this);
+		
 		demPolymorphs.add(new BluePolymorph(50, 50, 100, 100));
 		demPolymorphs.add(new RedPolymorph(150, 200, 150, 150));
 		demPolymorphs.add(new MovingMorph(100, 100, 100, 100));
@@ -63,5 +71,35 @@ public class PolymorphWindow extends JPanel implements ActionListener {
 		for (int i = 0; i < demPolymorphs.size(); i++) {
 			demPolymorphs.get(i).update();
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		mouseX = MouseInfo.getPointerInfo().getLocation().x;
+		mouseY = MouseInfo.getPointerInfo().getLocation().y;
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

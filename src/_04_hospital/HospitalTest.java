@@ -15,6 +15,33 @@ import junit.framework.TestCase;
  * 4. doctors can have no more than 3 patients
  */
 
+class Hospital {
+
+	public void addDoctor(Doctor dude) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<Doctor> getDoctors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addPatient(Patient patient) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<Doctor> getPatients() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	}
+class Doctor {}
+class GeneralPractitioner extends Doctor {}
+class Surgeon extends Doctor {}
+class Patient {}
+
 public class HospitalTest extends TestCase {
 
 	Hospital testHospital = new Hospital();
