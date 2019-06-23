@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -17,30 +18,90 @@ import junit.framework.TestCase;
 
 class Hospital {
 
-	public void addDoctor(Doctor dude) {
-		// TODO Auto-generated method stub
-		
-	}
+	List<Doctor> doctors = new ArrayList<Doctor>();
+	List<Patient> patients = new ArrayList<Patient>();
 
-	public List<Doctor> getDoctors() {
-		// TODO Auto-generated method stub
-		return null;
+	public void addDoctor(Doctor dude) {
+		doctors.add(dude);
 	}
 
 	public void addPatient(Patient patient) {
-		// TODO Auto-generated method stub
-		
+		patients.add(patient);
 	}
 
-	public List<Doctor> getPatients() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Doctor> getDoctors() {
+		return doctors;
 	}
+
+	public List<Patient> getPatients() {
+		return patients;
 	}
-class Doctor {}
-class GeneralPractitioner extends Doctor {}
-class Surgeon extends Doctor {}
-class Patient {}
+
+	public void assignPatientsToDoctors() {
+		for(int i = patients.size(); i > 0; i++) {
+//iterate through each doctor, give them an even amount of patients
+		}
+	}
+}
+
+class Doctor {
+
+	boolean workDone = false;
+	List<Patient> drPatients = new ArrayList<Patient>();
+
+	public boolean performsSurgery() {
+		return false;
+	}
+
+	public void assignPatient(Patient patient) {
+		drPatients.add(patient);
+	}
+
+	public List<Patient> getPatients() {
+		return drPatients;
+	}
+
+	public boolean makesHouseCalls() {
+		return false;
+	}
+
+	public void doMedicine() {
+		workDone = true;
+	}
+}
+
+class GeneralPractitioner extends Doctor {
+	public boolean makesHouseCalls() {
+		return true;
+	}
+
+	public boolean performsSurgery() {
+		return false;
+	}
+}
+
+class Surgeon extends Doctor {
+	public boolean makesHouseCalls() {
+		return false;
+	}
+
+	public boolean performsSurgery() {
+		return true;
+	}
+}
+
+class Patient {
+
+	boolean workDone = false;
+
+	public void checkPulse() {
+		workDone = true;
+	}
+
+	public boolean feelsCaredFor() {
+		return workDone;
+	}
+}
 
 public class HospitalTest extends TestCase {
 
@@ -119,14 +180,18 @@ public class HospitalTest extends TestCase {
 		} catch (DoctorFullException dfe) {
 			assertTrue(true);
 		}
-assertTrue(testDoctor.getPatients().size() == 3);
+		assertTrue(testDoctor.getPatients().size() == 3);
 	}
 
 	public void test8Patients() throws Exception {
 		// TODO: add 3 doctors to hospital
-
+		testHospital.addDoctor(new Doctor());
+		testHospital.addDoctor(new Doctor());
+		testHospital.addDoctor(new Doctor());
 		// TODO: add 8 patients to hospital
-
+		for (int i = 0; i < 8; i++) {
+			testHospital.addPatient(new Patient());
+		}
 		// hospital assigns patients to doctors
 		testHospital.assignPatientsToDoctors();
 		// hospital.getDoctors shows doctors have 3, 3, 2 patients
@@ -135,7 +200,5 @@ assertTrue(testDoctor.getPatients().size() == 3);
 		assertEquals(3, testDoctors.get(1).getPatients().size());
 		assertEquals(2, testDoctors.get(2).getPatients().size());
 	}
-
-
 
 }
