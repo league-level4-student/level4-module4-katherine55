@@ -37,23 +37,34 @@ class Hospital {
 		return patients;
 	}
 
-	public void assignPatientsToDoctors() {
-		for(int i = patients.size(); i > 0; i++) {
-//iterate through each doctor, give them an even amount of patients
+	public void assignPatientsToDoctors() throws DoctorFullException {
+
+		int counter = 0;
+		while (counter < patients.size()) {
+			for (int i = 0; i < doctors.size(); i++) {
+				if (counter < patients.size()) {
+					doctors.get(i).assignPatient(patients.get(counter));
+					counter++;
+				} else {
+					break;
+				}
+			}
 		}
 	}
 }
 
 class Doctor {
 
-	boolean workDone = false;
 	List<Patient> drPatients = new ArrayList<Patient>();
 
 	public boolean performsSurgery() {
 		return false;
 	}
 
-	public void assignPatient(Patient patient) {
+	public void assignPatient(Patient patient) throws DoctorFullException {
+		if (drPatients.size() >= 3) {
+			throw new DoctorFullException();
+		}
 		drPatients.add(patient);
 	}
 
@@ -66,7 +77,9 @@ class Doctor {
 	}
 
 	public void doMedicine() {
-		workDone = true;
+		for (int i = 0; i < drPatients.size(); i++) {
+			drPatients.get(i).checkPulse();
+		}
 	}
 }
 
